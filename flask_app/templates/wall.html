@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall</title>
+</head>
+
+<body>
+    <h2>CodingDojo Wall</h2>
+    <h2>Welcome, {{ session['first_name'] }}</h2>
+    <a href="/logout">Log Out</a>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="lef_col">
+
+        <h3>{{ inbox_length }} Messages for You</h3>
+
+        {% for message in inbox %}
+        <div class="message">
+            {{ message.sender.first_name }} said at {{message.created_at}}:
+            "{{ message.message }}"
+            <a href="/delete/message/{{ message.id}}">Delete</a>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="right_col">
+        <h3>Send Messages</h3>
+
+        <p>You have sent {{ recipients.count(recipients) }} of messages so far</p>
+
+        {% for recipient in recipients %}
+        {% if recipient.id != session['user_id'] %}
+        <form action="/post/message/{{ recipient.id }}" method="POST">
+
+
+
+            <label for="message">{{ recipient.first_name }}</label>
+            <input type="text" name='message'>
+
+            <button action="submit">Send</button>
+
+
+
+        </form>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

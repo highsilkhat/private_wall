@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration or Login Page</title>
+</head>
+
+<body>
+    <h1>Login Page</h1>
+
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    <h2>Sign-up for an account</h2>
+    <form action="/users/create" method='POST'>
+
+        <p>
+            <label for="first_name">
+                First Name:
+            </label>
+            <input type="text" name="first_name">
+        </p>
+
+        <p>
+            <label for="last_name">
+                Last Name:
+            </label>
+            <input type="text" name="last_name">
+        </p>
+
+        <p>
+            <label for="email">
+                Email:
+            </label>
+            <input type="text" name="email">
+        </p>
+
+        <p>
+            <label for="newPassword">
+                Create Password:
+            </label>
+            <input type="password" name="newPassword">
+        </p>
+
+        <p>
+            <label for="confirmPassword">
+                Confirm Password:
+            </label>
+            <input type="password" name="confirmPassword">
+        </p>
+
+        <p>
+            <button type="submit">
+                Submit
+            </button>
+        </p>
+
+
+    </form>
+
+        <h2>Login</h2>
+    <form action="/users/login" method= 'POST'>
+        <p>
+            <label for="username">
+                Username
+            </label>
+            <input type="text" name ="username">
+
+            <label for="password">
+                Password:
+            </label>
+            <input type="password" name = "password">
+
+            <button type="submit">
+                Login
+            </button>
+
+            
+        </p>
+    </form>
+
+</body>
+
+</html>
